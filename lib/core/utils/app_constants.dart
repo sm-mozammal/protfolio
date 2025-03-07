@@ -34,6 +34,14 @@ abstract class AppConstants {
           'https://play.google.com/store/apps/details?id=com.quikkbyte.quikkbyte',
     ),
     Project(
+      name: 'FSKILLS',
+      imageUrl: AppAssets.fskills,
+      description:
+          "Train daily for 20-min and improve your technique and master your football skills with the comfort of your home. FSKILLS is a football training app that provides you with daily training sessions, personalized to your skill level and goals. This app makes with flutter and laravel backend with user friendly UI",
+      googlePlay:
+          'https://play.google.com/store/apps/details?id=nz.co.fskills.app&hl=en ',
+    ),
+    Project(
       name: 'The Certify Hub',
       imageUrl: AppAssets.image2,
       description:

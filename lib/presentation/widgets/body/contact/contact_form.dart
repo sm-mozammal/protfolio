@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_enums.dart';
@@ -77,7 +81,41 @@ class _ContactFormState extends State<ContactForm> {
             const SizedBox(height: 16),
             CustomButton(
               label: 'Submit',
-              onPressed: () {},
+              onPressed: () async {
+                final Email email = Email(
+                  body: _messageController.text, // Message body
+                  subject: _subjectController.text, // Email subject
+                  recipients: [
+                    'imonbdcallingit@gmail.com'
+                  ], // Replace with your desired recipient
+                  cc: [], // Optional CC
+                  bcc: [], // Optional BCC
+                  isHTML: false, // Set to true if using HTML content
+                );
+
+                try {
+                  await FlutterEmailSender.send(email);
+                  log('Email sent successfully!');
+                  Fluttertoast.showToast(
+                      msg: 'Email sent successfully!',
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.greenAccent,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                } catch (error) {
+                  log('Failed to send email: $error');
+                  Fluttertoast.showToast(
+                      msg: 'Failed to send email: $error',
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.CENTER,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.redAccent,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                }
+              },
               backgroundColor: AppColors.primaryColor,
               width: _getFormWidth(context.width),
             ),
